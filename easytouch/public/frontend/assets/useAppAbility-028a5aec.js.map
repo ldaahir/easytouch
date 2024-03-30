@@ -1,0 +1,1 @@
+{"version":3,"file":"useAppAbility-028a5aec.js","sources":["../../../../frontend/src/plugins/casl/useAppAbility.js"],"sourcesContent":["import { useAbility } from '@casl/vue'\n\nexport const useAppAbility = () => useAbility()\n"],"names":["useAppAbility","useAbility"],"mappings":"yCAEY,MAACA,EAAgB,IAAMC,EAAU"}
