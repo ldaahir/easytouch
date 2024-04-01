@@ -12,6 +12,8 @@ import authV2MaskDark from '@images/pages/misc-mask-dark.png'
 import authV2MaskLight from '@images/pages/misc-mask-light.png'
 import { VNodeRenderer } from '@layouts/components/VNodeRenderer'
 import { themeConfig } from '@themeConfig'
+import { createListResource } from 'frappe-ui'
+
 import {
   emailValidator,
   requiredValidator,
@@ -30,31 +32,100 @@ const errors = ref({
 })
 
 const refVForm = ref()
-const email = ref('admin@demo.com')
-const password = ref('admin')
+const email = ref('administrator')
+const password = ref('1234')
 const rememberMe = ref(false)
 
-const login = () => {
-  axios.post('/auth/login', {
-    email: email.value,
-    password: password.value,
-  }).then(r => {
-    const { accessToken, userData, userAbilities } = r.data
+// const login = () => {
+//   axios.post('/auth/login', {
+//     email: email.value,
+//     password: password.value,
+//   }).then(async r => {
+//     const { accessToken, userData, userAbilities } = r.data
+//     console.log(userAbilities)
+//     localStorage.setItem('userAbilities', JSON.stringify(userAbilities))
+//     ability.update(userAbilities)
+//     localStorage.setItem('userData', JSON.stringify(userData))
+//     localStorage.setItem('accessToken', JSON.stringify(accessToken))
 
-    localStorage.setItem('userAbilities', JSON.stringify(userAbilities))
-    ability.update(userAbilities)
-    localStorage.setItem('userData', JSON.stringify(userData))
-    localStorage.setItem('accessToken', JSON.stringify(accessToken))
+//     // Redirect to `to` query if exist or redirect to index route
+//     const m= await router.replace(route.query.to ? String(route.query.to) : '/')
+//     console.log("m waa : ",m)
+//   }).catch(e => {
+//     const { errors: formErrors } = e.response.data
 
-    // Redirect to `to` query if exist or redirect to index route
-    router.replace(route.query.to ? String(route.query.to) : '/')
-  }).catch(e => {
-    const { errors: formErrors } = e.response.data
+//     errors.value = formErrors
+//     console.error(e.response.data)
+//   })
+// }
+const change_dic_name=(colName,data)=>{
+  let dict={}
+  let i=0;
+  for(let key in data[0]){
+    dict[colName[i]]=data[0][key]
+    i++;
+  }
+  return dict
 
-    errors.value = formErrors
-    console.error(e.response.data)
-  })
 }
+const get_Data=async (api,fields,filters)=>{
+  const response=await axios.get(api,{
+    params:{
+      filters: JSON.stringify(filters),
+      fields:JSON.stringify(fields)
+    }
+
+  });
+  return response.data.data
+}
+
+
+
+const login = async () => {
+  
+    axios
+    .post('/api/method/login', {
+      usr: email.value,
+      pwd: password.value
+    }).then(async response => {
+      if (response!==undefined){
+        console.log('Login successful:', response);
+        const xog=await get_Data("/api/resource/User",
+      ['name','full_name','username','email','user_image','role_profile_name'],
+      {'username':email.value}
+      )
+      const userAbilities= [
+      {
+        "action": "manage",
+        "subject": "all"
+      }
+    ]
+    const UserData=change_dic_name(["id","fullName","username","email","avatar","role"],xog)
+
+      localStorage.setItem('userAbilities', JSON.stringify(userAbilities))
+      ability.update(userAbilities)
+      const accessToken="40d9ab79d28e107.74b1cf4d358d2cb"
+      localStorage.setItem('accessToken', JSON.stringify(accessToken))
+     
+
+      localStorage.setItem('userData', JSON.stringify(UserData))
+      router.replace(route.query.to ? String(route.query.to) : '/')
+      
+      }
+      else{
+        errors.value ={email:"email or password is invalid",password:""} 
+
+      }
+      
+    })
+    .catch(e => {
+      // const { errors: formErrors } = e.response.data
+      errors.value ={email:"email or password is invalid",password:""} 
+      console,log(errors)
+      // console.error(e.response.data)
+    });
+
+};
 
 const onSubmit = () => {
   refVForm.value?.validate().then(({ valid: isValid }) => {
@@ -136,9 +207,9 @@ const onSubmit = () => {
                 <AppTextField
                   v-model="email"
                   label="Email"
-                  type="email"
+                  type="text"
                   autofocus
-                  :rules="[requiredValidator, emailValidator]"
+                  :rules="[requiredValidator]"
                   :error-messages="errors.email"
                 />
               </VCol>
