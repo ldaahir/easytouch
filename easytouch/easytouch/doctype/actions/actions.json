@@ -1,0 +1,92 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-04-02 10:52:48.901915",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "actions_information_section",
+  "title",
+  "date",
+  "category",
+  "column_break_avbu",
+  "due_date",
+  "status",
+  "section_break_gmrz",
+  "description"
+ ],
+ "fields": [
+  {
+   "fieldname": "actions_information_section",
+   "fieldtype": "Section Break",
+   "label": "Actions Information"
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "title",
+   "reqd": 1
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "due_date",
+   "fieldtype": "Date",
+   "label": "Due Date"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "HTML Editor",
+   "label": "Description"
+  },
+  {
+   "default": "ToDo",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "ToDo\nCompleted\nArchived"
+  },
+  {
+   "fieldname": "column_break_avbu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_gmrz",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "category",
+   "fieldtype": "Link",
+   "label": "Category",
+   "options": "Category"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-04-02 11:02:42.390502",
+ "modified_by": "Administrator",
+ "module": "Easytouch",
+ "name": "Actions",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -32,8 +32,8 @@ const errors = ref({
 })
 
 const refVForm = ref()
-const email = ref('administrator')
-const password = ref('1234')
+const email = ref('liban@yooltech.com')
+const password = ref('Lii8891')
 const rememberMe = ref(false)
 
 // const login = () => {
@@ -88,25 +88,36 @@ const login = async () => {
       usr: email.value,
       pwd: password.value
     }).then(async response => {
+      let xog=""
       if (response!==undefined){
-        console.log('Login successful:', response);
-        const xog=await get_Data("/api/resource/User",
-      ['name','full_name','username','email','user_image','role_profile_name'],
-      {'username':email.value}
+          xog=await get_Data("/api/resource/User",
+        ['name','full_name','username','email','user_image','role_profile_name'],
+        {'username':email.value}
       )
-      const userAbilities= [
-      {
-        "action": "manage",
-        "subject": "all"
+      console.log("xog.length===0 : ",xog.length===0)
+      if(xog.length===0){
+          xog=await get_Data("/api/resource/User",
+        ['name','full_name','username','email','user_image','role_profile_name'],
+        {'email':email.value}
+
+      )
+      xog[0]["role_profile_name"]="client"
+      console.log(xog)
       }
-    ]
+  
+
+      const userAbilities= [
+        {
+          action:'hubi',
+          subject:'check'
+        }
+      ]
     const UserData=change_dic_name(["id","fullName","username","email","avatar","role"],xog)
 
       localStorage.setItem('userAbilities', JSON.stringify(userAbilities))
       ability.update(userAbilities)
       const accessToken="40d9ab79d28e107.74b1cf4d358d2cb"
       localStorage.setItem('accessToken', JSON.stringify(accessToken))
-     
 
       localStorage.setItem('userData', JSON.stringify(UserData))
       router.replace(route.query.to ? String(route.query.to) : '/')
@@ -119,10 +130,9 @@ const login = async () => {
       
     })
     .catch(e => {
-      // const { errors: formErrors } = e.response.data
-      errors.value ={email:"email or password is invalid",password:""} 
-      console,log(errors)
-      // console.error(e.response.data)
+      const { errors: formErrors } = e.response.data
+      console.log(errors)
+      console.error(e.response.data)
     });
 
 };

@@ -18,6 +18,7 @@ export default [
         to: 'dashboards-crm',
         icon: { icon: 'tabler-3d-cube-sphere' },
       },
+     
     ],
   },
 ]

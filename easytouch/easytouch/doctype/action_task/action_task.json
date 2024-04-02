@@ -1,0 +1,54 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-04-02 12:12:01.346855",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "action_task_information_section",
+  "description",
+  "is_completed"
+ ],
+ "fields": [
+  {
+   "fieldname": "action_task_information_section",
+   "fieldtype": "Section Break",
+   "label": "Action task information"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_completed",
+   "fieldtype": "Check",
+   "label": "is completed"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-04-02 12:13:13.041662",
+ "modified_by": "Administrator",
+ "module": "Easytouch",
+ "name": "action task",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

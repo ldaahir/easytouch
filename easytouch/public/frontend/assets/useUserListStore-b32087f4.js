@@ -1,0 +1,2 @@
+import{v as o,o as n}from"./index-e1b913cd.js";const u=o("UserListStore",{actions:{fetchUsers(s){return n.get("/apps/users/list",{params:s})},addUser(s){return new Promise((r,t)=>{n.post("/apps/users/user",{user:s}).then(e=>r(e)).catch(e=>t(e))})},fetchUser(s){return new Promise((r,t)=>{n.get(`/apps/users/${s}`).then(e=>r(e)).catch(e=>t(e))})},deleteUser(s){return new Promise((r,t)=>{n.delete(`/apps/users/${s}`).then(e=>r(e)).catch(e=>t(e))})}}});export{u};
+//# sourceMappingURL=useUserListStore-b32087f4.js.map

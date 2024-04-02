@@ -5,7 +5,7 @@ import routes from '~pages'
 import { canNavigate } from '@layouts/plugins/casl'
 
 const router = createRouter({
-  history: createWebHistory("easytouch"),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     // ℹ️ We are redirecting to different pages based on role.
     // NOTE: Role is just for UI purposes. ACL is based on abilities.
@@ -14,10 +14,14 @@ const router = createRouter({
       redirect: to => {
         const userData = JSON.parse(localStorage.getItem('userData') || '{}')
         const userRole = (userData && userData.role) ? userData.role : null
+        console.log("userRole",userRole)
         if (userRole === 'admin')
           return { name: 'dashboards-analytics' }
         if (userRole === 'client')
           return { name: 'access-control' }
+        
+
+        
         
         return { name: 'login', query: to.query }
       },
@@ -39,7 +43,7 @@ const router = createRouter({
 router.beforeEach(to => {
   const isLoggedIn = isUserLoggedIn()
   console.log("isLoggedIn",isLoggedIn)
-
+  return
   /*
   
     ℹ️ Commented code is legacy code

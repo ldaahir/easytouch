@@ -1,0 +1,2 @@
+import{g as n}from"./index-e1b913cd.js";import{$ as a,I as c,J as s,K as r,k as i}from"./frappe-ui-26ef7369.js";const d={__name:"DialogCloseBtn",props:{icon:{type:String,required:!1,default:"tabler-x"},iconSize:{type:String,required:!1,default:"22"}},setup(o){const e=o;return(l,p)=>{const t=a("IconBtn");return c(),s(t,{variant:"elevated",class:"v-dialog-close-btn"},{default:r(()=>[i(n,{icon:e.icon,size:e.iconSize},null,8,["icon","size"])]),_:1})}}};export{d as _};
+//# sourceMappingURL=DialogCloseBtn-e850c944.js.map
